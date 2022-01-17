@@ -22,7 +22,6 @@ class MainViewController: UIViewController {
     }
 }
 
-
 extension MainViewController: ColorViewControllerDelegate {
     func setColor(_ color: UIColor) {
         view.backgroundColor = color

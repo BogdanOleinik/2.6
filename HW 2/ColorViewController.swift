@@ -119,3 +119,33 @@ class ColorViewController: UIViewController {
         String(format: "%.2f", slider.value)
     }
 }
+
+// MARK: UITextFieldDelegate
+
+extension ColorViewController: UITextFieldDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        
+        if let currentValue = Float(text) {
+            switch textField {
+            case redTextField:
+                redSlider.setValue(currentValue, animated: true)
+                setValue(for: redLabel)
+            case greenTextField:
+                greenSlider.setValue(currentValue, animated: true)
+                setValue(for: greenLabel)
+            default:
+                blueSlider.setValue(currentValue, animated: true)
+                setValue(for: blueLabel)
+            }
+            
+            setColor()
+            return
+        }
+    }
+}
